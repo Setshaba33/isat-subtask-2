@@ -1,0 +1,138 @@
+import random
+
+def decimal_to_binary(decimal_num):
+    """
+    Converts a decimal integer to its binary string equivalent.
+    """
+    if not isinstance(decimal_num, int) or decimal_num < 0:
+        return "Invalid input: Please enter a non-negative integer."
+    if decimal_num == 0:
+        return "0"
+    
+    binary_string = ""
+    temp_num = decimal_num
+    while temp_num > 0:
+        remainder = temp_num % 2
+        binary_string = str(remainder) + binary_string
+        temp_num //= 2
+    return binary_string
+
+def binary_to_decimal(binary_string):
+    """
+    Converts a binary string to its decimal integer equivalent.
+    """
+    if not isinstance(binary_string, str) or not all(bit in '01' for bit in binary_string):
+        return "Invalid input: Please enter a valid binary string (containing only '0's and '1's)."
+    if not binary_string:
+        return 0 # An empty binary string can represent 0
+
+    decimal_num = 0
+    power = 0
+    # Iterate through the binary string from right to left
+    for digit in reversed(binary_string):
+        if digit == '1':
+            decimal_num += (2 ** power)
+        power += 1
+    return decimal_num
+
+def decimal_to_hexadecimal(decimal_num):
+    """
+    Converts a decimal integer to its hexadecimal string equivalent.
+    """
+    if not isinstance(decimal_num, int) or decimal_num < 0:
+        return "Invalid input: Please enter a non-negative integer."
+    if decimal_num == 0:
+        return "0"
+
+    hex_digits = "0123456789ABCDEF"
+    hex_string = ""
+    temp_num = decimal_num
+    while temp_num > 0:
+        remainder = temp_num % 16
+        hex_string = hex_digits[remainder] + hex_string
+        temp_num //= 16
+    return hex_string
+
+def hexadecimal_to_decimal(hex_string):
+    """
+    Converts a hexadecimal string to its decimal integer equivalent.
+    """
+    if not isinstance(hex_string, str) or not all(char.upper() in "0123456789ABCDEF" for char in hex_string):
+        return "Invalid input: Please enter a valid hexadecimal string."
+    if not hex_string:
+        return 0 # An empty hex string can represent 0
+
+    decimal_num = 0
+    power = 0
+    hex_map = {'0':0, '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9,
+               'A':10, 'B':11, 'C':12, 'D':13, 'E':14, 'F':15}
+
+    # Iterate through the hexadecimal string from right to left
+    for digit in reversed(hex_string.upper()):
+        decimal_num += hex_map[digit] * (16 ** power)
+        power += 1
+    return decimal_num
+
+def display_menu():
+    """
+    Displays the menu options to the user.
+    """
+    print("\n--- Converter Program Menu ---")
+    print("1. Convert Decimal to Binary")
+    print("2. Convert Binary to Decimal")
+    print("3. Convert Decimal to Hexadecimal")
+    print("4. Convert Hexadecimal to Decimal")
+    print("5. Demo (Generate and convert random integers to binary)")
+    print("6. Exit")
+    print("----------------------------")
+
+def run_program():
+    """
+    Main function to run the menu-driven converter program.
+    """
+    while True:
+        display_menu()
+        choice = input("Enter your choice (1-6): ")
+
+        if choice == '1':
+            try:
+                dec_val = int(input("Enter a decimal number: "))
+                result = decimal_to_binary(dec_val)
+                print(f"Decimal {dec_val} is Binary: {result}")
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+        
+        elif choice == '2':
+            bin_val = input("Enter a binary string: ")
+            result = binary_to_decimal(bin_val)
+            print(f"Binary {bin_val} is Decimal: {result}")
+
+        elif choice == '3':
+            try:
+                dec_val = int(input("Enter a decimal number: "))
+                result = decimal_to_hexadecimal(dec_val)
+                print(f"Decimal {dec_val} is Hexadecimal: {result}")
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+
+        elif choice == '4':
+            hex_val = input("Enter a hexadecimal string: ")
+            result = hexadecimal_to_decimal(hex_val)
+            print(f"Hexadecimal {hex_val} is Decimal: {result}")
+
+        elif choice == '5':
+            random_num = random.randint(0, 99)
+            binary_result = decimal_to_binary(random_num)
+            print(f"\nGenerated Random Decimal: {random_num}")
+            print(f"Converted to Binary: {binary_result}")
+
+        elif choice == '6':
+            print("Exiting the program. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please enter a number between 1 and 6.")
+
+# This ensures that run_program() is called only when the script is executed directly
+if __name__ == "__main__":
+    run_program()
