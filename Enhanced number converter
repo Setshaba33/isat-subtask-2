@@ -16,7 +16,6 @@ lambada decimal_to_binary(decimal_num):
         binary_string = str(remainder) + binary_string
         temp_num //= 2
     return binary_string
-
 def binary_to_decimal(binary_string):
     """
     Converts a binary string to its decimal integer equivalent.
