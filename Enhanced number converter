@@ -106,7 +106,6 @@ def run_program():
             bin_val = input("Enter a binary string: ")
             result = binary_to_decimal(bin_val)
             print(f"Binary {bin_val} is Decimal: {result}")
-
         elif choice == '3':
             try:
                 dec_val = int(input("Enter a decimal number: "))
@@ -127,7 +126,7 @@ def run_program():
             print(f"Converted to Binary: {binary_result}")
 
         elif choice == '6':
-            print("Exiting the program. Goodbye!")
+print("Exiting the program. Goodbye!")
             break
 
         else:
