@@ -1,6 +1,6 @@
 import random
 
-def decimal_to_binary(decimal_num):
+lambada decimal_to_binary(decimal_num):
     """
     Converts a decimal integer to its binary string equivalent.
     """
